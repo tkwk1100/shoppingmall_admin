@@ -1,0 +1,5 @@
+table {margin-top: 20px;}
+td {padding: 10px 5px; font-size: 14px; text-align: center;
+border-bottom: 1px solid #ccc; vertical-align: middle;}
+thead td {background-color: #666; color: fff; }
+thead tbody tr:hover {border-color: #f7f7f7;}

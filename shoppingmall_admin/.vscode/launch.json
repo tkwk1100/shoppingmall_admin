@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ShoppingmallAdminApplication<shoppingmall_admin>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.shopping.ShoppingmallAdminApplication",
+            "projectName": "shoppingmall_admin",
+            "args": ""
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+.list table td {
+    /* bd1+p10+vam+tac */
+    border-bottom: 1px solid #ccc; padding:10px; 
+    vertical-align: middle; text-align: center;
+}
+.list table tr:nth-child(even) {
+    background-color: #fbfbfb;
+}
+.list table {min-width:1050px;}
+.list thead td {background-color: #333; color: #fff;
+border-color: #333;}
+
+body > h1 {font-size: 32px; font-weight: 700; margin-bottom: 30px;}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopping.mapper.ProductMapper">
+    <insert id="insertProduct">
+    insert into product_info(
+        pi_name,pi_cate_seq,pi_stock,pi_si_seq,
+        pi_discount_rate,pi_caution,pi_weight,
+        pi_point_rate,pi_di_seq,pi_price, pi_img_uri)
+    values(
+        #{pi_name},#{pi_cate_seq},#{pi_stock},#{pi_si_seq},
+        #{pi_discount_rate},#{pi_caution},#{pi_weight},
+        #{pi_point_rate},#{pi_di_seq},#{pi_price}, #{pi_img_uri}
+    )
+    </insert>
+    <select id="selectProducts" resultType="com.shopping.vo.ProductVO">
+        select * from product_info
+        where pi_name like #{keyword}
+        <if test="category != null">
+            and pi_cate_seq = #{category}
+        </if>
+        limit 15 offset #{offset}
+    </select>
+    <delete id="deleteProduct">
+        delete from product_info where pi_seq=#{seq}
+    </delete>
+    <insert id="insertProductImage">
+        insert into prod_image(pimg_file_name,pimg_uri,pimg_size)
+        values(#{pimg_file_name},#{pimg_uri},#{pimg_size});
+    </insert>
+    <select id="selectProductImagePath" resultType="java.lang.String">
+        select pimg_file_name from prod_image where pimg_uri=#{uri} order by pimg_seq desc limit 1
+    </select>
+    <select id="selectRecommandProducts" resultType="com.shopping.vo.ProductVO">
+        select a.* from product_info a inner join recommand b
+        on a.pi_seq = b.reco_pi_seq;
+    </select>
+    <select id="selectNotRecommandProducts" resultType="com.shopping.vo.ProductVO">
+        select a.* from product_info a left outer join recommand b 
+        on a.pi_seq = b.reco_pi_seq 
+        where 
+            b.reco_pi_seq is null
+        and
+            a.pi_name like #{keyword}
+        <if test="cate_seq != 0">
+            and
+                a.pi_cate_seq=#{cate_seq}
+        </if>
+        <if test="si_seq != 0">
+            and
+                a.pi_si_seq=#{si_seq}
+        </if>
+    </select>
+    <insert id="insertRecommandProduct">
+        insert into recommand(reco_pi_seq) values(#{prod_seq});
+    </insert>
+    <delete id="deleteRecommandProduct">
+        delete from recommand where reco_pi_seq = #{prod_seq};
+    </delete>
+
+    <select id="selectProductBySeq" resultType="com.shopping.vo.ProductVO">
+        select * from product_info where pi_seq=#{seq}
+    </select>
+    <update id="updateProduct">
+        update product_info set 
+            pi_name=#{pi_name}, pi_cate_seq=#{pi_cate_seq}, pi_stock=#{pi_stock},
+            pi_si_seq=#{pi_si_seq}, pi_discount_rate=#{pi_discount_rate},
+            pi_caution=#{pi_caution}, pi_weight=#{pi_weight},
+            pi_point_rate=#{pi_point_rate}, pi_di_seq=#{pi_di_seq}, pi_price=#{pi_price},
+            pi_img_uri=#{pi_img_uri}
+        where pi_seq=#{pi_seq}
+    </update>
+
+</mapper>
