@@ -14,4 +14,4 @@ public interface CategoryMapper {
     public void deleteCategory(Integer seq);
     public String selectCategoryName(Integer seq);
     public Integer selectCateProdCnt(Integer seq);
-} 
+}

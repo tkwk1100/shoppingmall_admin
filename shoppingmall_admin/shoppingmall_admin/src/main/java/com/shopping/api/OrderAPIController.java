@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class OrderAPIConrtoller {
+public class OrderAPIController {
     @Autowired OrderService service;
     @PatchMapping("/order/status")
-    public Map<String, Object> patchOrderStatus(@RequestParam Integer status, @RequestParam Integer oi_seq) {
+    public Map<String, Object> patchOrderStatus(
+        @RequestParam Integer status, @RequestParam Integer oi_seq
+    ) {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 
         service.updateDeliveryStatus(status, oi_seq);

@@ -49,7 +49,7 @@ public class CategoryAPIController {
     public Map<String, Object> deleteCategory(@RequestParam Integer seq) {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
         
-        service.deleteCategory(seq); 
+        service.deleteCategory(seq);
 
         resultMap.put("message", "삭제되었습니다.");
         return resultMap;
