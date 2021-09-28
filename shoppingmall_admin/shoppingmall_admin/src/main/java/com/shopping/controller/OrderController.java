@@ -3,7 +3,7 @@ package com.shopping.controller;
 import java.util.List;
 
 import com.shopping.service.OrderService;
-import com.shopping.vo.OrderInfoVo;
+import com.shopping.vo.OrderInfoVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class OrderController {
     @Autowired OrderService service;
     @GetMapping("/order")
-    public String gbetOrder(@RequestParam @Nullable Integer offset, Model model){
+    public String getOrder(@RequestParam @Nullable Integer offset, Model model) {
         if(offset == null) offset = 0;
-
-        List<OrderInfoVo> list = service.selectOrderInfo(offset);
+        List<OrderInfoVO> list = service.selectOrderInfo(offset);
         Integer cnt = service.selectOrderCount();
         model.addAttribute("list", list);
         model.addAttribute("cnt", cnt);
